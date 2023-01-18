@@ -45,6 +45,17 @@ export default function App() {
     }
   }
 
+  const handleWordClick = async (event: any) => {
+    await setSearch(event.target.id)
+    if(btnSelected === 'syn'){
+      synRefetch()
+    } else if (btnSelected === 'rhy'){
+      rhyRefetch()
+    } else{
+      adjRefetch()
+    }
+  }
+
 
 // Synonym query
   const { data: synData, isLoading: synLoading, refetch: synRefetch } = useQuery(
@@ -98,7 +109,7 @@ export default function App() {
 
 // Results component
   const results = Data === undefined ? 
-    <h2>No Word Entered</h2> : <Results data={Data} isLoading={loading} />;
+    <h2>No Word Entered</h2> : <Results data={Data} isLoading={loading} handleWordClick={handleWordClick}/>;
 
   return(
     <div className="main-container">
@@ -114,7 +125,6 @@ export default function App() {
         />
       </div>
       <div className="block"></div>
-      <div className="results-container">
         <div className="btn-options">
           <Button 
             handleClick={handleClick} 
@@ -135,6 +145,7 @@ export default function App() {
             name='adj' 
           />
         </div>
+      <div className="results-container">
         {results}
       </div>
     </div>

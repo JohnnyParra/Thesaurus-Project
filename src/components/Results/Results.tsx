@@ -13,15 +13,15 @@ export default function Results(props: any) {
 
   const resultsElement = props.data?.map((word: any, i: number) => {
     if(i % 2 == 0){
-      return <p key={nanoid()} style={{color: '#000000'}} className="word">{word.word}</p>
+      return <p key={nanoid()} id={word.word} onClick={(event: any) => props.handleWordClick(event)} style={{color: '#000000'}} className="word">{word.word}</p>
     } else{
-      return <p key={nanoid()} className="word">{word.word}</p>
+      return <p key={nanoid()} id={word.word} onClick={(event: any) => props.handleWordClick(event)} className="word">{word.word}</p>
     }
   })
 
   return(
-    <div className="results">
+    <>
       {resultsElement}
-    </div>
+    </>
   )
 }
